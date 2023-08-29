@@ -1,0 +1,48 @@
+﻿@model SignInViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Sign In</h1>
+
+
+<div>
+    @*asp-route-returnUrl="@ViewData["returnUrl"]"  return url*@
+    <form asp-controller="Account" asp-action="SignIn" method="post">
+        <div asp-validation-summary="ModelOnly"></div>
+
+        @if (ViewData["ErrorMessage"] != null)
+        {
+            <div class="text-danger">@ViewData["ErrorMessage"]</div>
+        }
+
+        <label asp-for="UserName" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="UserName" class="form-control" />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+
+        <label asp-for="PassWord" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="PassWord" class="form-control" />
+            <span asp-validation-for="PassWord" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="RememberMe"></label>
+            <input asp-for="RememberMe" />
+            <span asp-validation-for="RememberMe"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">sign in</button>
+    </form>
+</div>
+
+
+@section Scripts
+    {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
